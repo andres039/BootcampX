@@ -13,8 +13,8 @@ FROM cohorts
 JOIN students ON cohorts.id = students.cohort_id
 JOIN assistance_requests ON students.id = assistance_requests.student_id
 JOIN teachers ON assistance_requests.teacher_id = teachers.id
-WHERE cohorts.name =  '${process.argv[2]}'
-ORDER BY teachers.name;`)
+WHERE cohorts.name =  $1
+ORDER BY teachers.name;`, [`${process.argv[2]}`])
 .then(res => {
   
   res.rows.forEach(user => {

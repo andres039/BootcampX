@@ -11,9 +11,9 @@ pool.query(`
 SELECT students.id, students.name as student, cohort_id, cohorts.name as name
 FROM students
 JOIN cohorts ON students.cohort_id = cohorts.id
-WHERE cohorts.name = '${process.argv[2]}'
-LIMIT ${process.argv[3]};
-`)
+WHERE cohorts.name = $1
+LIMIT $2;
+`, [`${process.argv[2]}`,`${process.argv[3]}`])
 .then(res => {
   
   res.rows.forEach(user => {
